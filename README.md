@@ -1,10 +1,21 @@
 # AMES House Price Prediction
 
+<p align="center">
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
+<a target="_blank" href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+</p>
+
+
 
 Predict house prices using  various regression techniques.
+
+Objectives:
+1. A production-ready ML project making use of:
+    1. the DS cookiecutter directory structure, and
+    1. Scikit-Learn's pipelines.
+1. Basic web app where users can input house characteristics and get an estimate of the price using FastAPI.
 
 ## Project Organization
 
