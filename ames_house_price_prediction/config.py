@@ -30,3 +30,24 @@ try:
     logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
 except ModuleNotFoundError:
     pass
+
+TARGET = "SalePrice"
+FEATURES = [
+    "Neighborhood",
+    "SaleCondition",
+    "LotArea",
+    "YearBuilt",
+    "YrSold",
+    "OverallQual",
+    "OverallCond",
+]
+CAT_FEATURES = [
+    "Neighborhood",
+    "SaleCondition",
+]
+NUM_FEATURES = [
+    "LotArea",
+    "LotAge",
+    "OverallQual",
+    "OverallCond",
+]
