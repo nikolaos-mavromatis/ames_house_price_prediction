@@ -8,14 +8,13 @@
 </p>
 
 
-
 Predict house prices using  various regression techniques.
 
-Objectives:
-1. A production-ready ML project making use of:
-    1. the DS cookiecutter directory structure, and
-    1. Scikit-Learn's pipelines.
-1. Basic web app where users can input house characteristics and get an estimate of the price using FastAPI.
+This project focuses on 3 main things:
+1. Business statement,
+1. A simple but structured ML pipeline using Sklearn pipelines, and
+1. A UI where users can get a quote for their inputs.
+
 
 ## Project Organization
 
