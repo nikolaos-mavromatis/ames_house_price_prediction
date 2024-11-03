@@ -1,0 +1,10 @@
+.git/
+.venv/
+.vscode/
+data/
+docs/
+notebooks/
+references/
+reports/
+.env
+.gitignore
