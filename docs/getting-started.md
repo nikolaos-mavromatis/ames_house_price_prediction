@@ -13,14 +13,6 @@ and navigate to it:
 cd house-price-quoting-app
 ```
 
-<!-- ## Python Environment
-
-``` bash
-python3 -m venv .venv
-
-source 
-``` -->
-
 ## Docker Containers
 
 In this project two containers need to be created:
@@ -56,9 +48,9 @@ docker-compose up -d
 
 ``` bash
 [+] Running 3/3
- ✔ Network ames_house_price_prediction_housing-app     Created             0.0s 
- ✔ Container ames_house_price_prediction-app-1         Started             0.2s 
- ✔ Container ames_house_price_prediction-api-1         Started             0.2s
+ ✔ Network house-price-quoting-app_housing-app     Created                 0.0s 
+ ✔ Container house-price-quoting-app-app-1         Started                 0.2s 
+ ✔ Container house-price-quoting-app-api-1         Started                 0.2s
 ```
 
 ### Teardown
@@ -72,7 +64,34 @@ docker-compose down
 In this case, it should result to the following:
 ``` bash
 [+] Running 3/3
- ✔ Container ames_house_price_prediction-app-1         Removed             0.2s 
- ✔ Container ames_house_price_prediction-api-1         Removed             0.5s
- ✔ Network ames_house_price_prediction_housing-app     Removed             0.1s
+ ✔ Container house-price-quoting-app-app-1         Removed                 0.2s 
+ ✔ Container house-price-quoting-app-api-1         Removed                 0.5s
+ ✔ Network house-price-quoting-app_housing-app     Removed                 0.1s
 ```
+## Use the app
+
+Visit [http://localhost:8501](http://localhost:8501) and experiment with the UI.
+
+This is how it looks like:
+
+![User Interface](assets/UI_Screenshot.png){ width="80%"}
+/// caption
+The UI was made with Streamlit.
+///
+    
+## Recap
+After navigating to the project directory where the project will live, this is the full script to set it up from scratch.
+
+``` bash
+git clone https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
+cd house-price-quoting-app
+docker-compose up -d
+open http://localhost:8501/
+```
+
+!!! warning
+    Don't forget to tear down everything after you have finished.
+
+    ``` bash
+    docker-compose down
+    ```
