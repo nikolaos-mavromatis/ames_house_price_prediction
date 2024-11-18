@@ -21,9 +21,6 @@ theme:
     - navigation.path
     - content.code.copy
 
-plugins:
-  - render_swagger
-
 markdown_extensions:
   - admonition
   - pymdownx.details
