@@ -1,8 +1,8 @@
-# AMES House Price Prediction documentation!
+# Introduction
 
 ## Description
 
-Predict house prices using  various regression techniques.
+
 
 ## Commands
 
