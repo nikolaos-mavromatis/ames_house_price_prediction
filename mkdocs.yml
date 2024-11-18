@@ -5,20 +5,32 @@ repo_url: https://github.com/nikolaos-mavromatis/ames_house_price_prediction
 repo_name: nikolaos-mavromatis/house-price-quoting-app
 
 nav:
-    - index.md
-    - getting-started.md
-    - methodology.md
+  - index.md
+  - getting-started.md
+  - methodology.md
 
 theme:
-    name: material
-    language: en
-    font:
-        text: Avenir Next
-    icon:
-        logo: material/home
-        repo: fontawesome/brands/github
-    features:
-        - navigation.path
+  name: material
+  language: en
+  font:
+    text: Avenir Next
+  icon:
+    logo: material/home
+    repo: fontawesome/brands/github
+  features:
+    - navigation.path
+    - content.code.copy
 
 plugins:
-    - render_swagger
+  - render_swagger
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
