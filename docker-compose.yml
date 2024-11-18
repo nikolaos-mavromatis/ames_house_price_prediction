@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      dockerfile: ./dockerfile-streamlit
+    ports:
+      - "8501:8501"
+    networks:
+      - housing-app
+
+  api:
+    build:
+      dockerfile: ./dockerfile-fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - housing-app
+
+networks:
+  housing-app:
+    driver: bridge
