@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY /app/main.py /app/
 
-RUN pip install streamlit
+RUN pip install streamlit babel
 
 EXPOSE 8501
 
