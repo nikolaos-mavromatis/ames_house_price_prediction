@@ -70,7 +70,7 @@ with main:
             }
             quote = requests.get(
                 # FIXME: replace local host+port with cloud details
-                url="http://127.0.0.1:8000/quote/",
+                url="http://api:8000/quote/",
                 params=params,
             ).json()
             quote_in_dollars = locale.currency(quote, grouping=True)
