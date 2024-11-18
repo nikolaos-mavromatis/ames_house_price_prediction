@@ -1,10 +1,7 @@
-import locale
+from babel.numbers import format_currency
 import requests
 
 import streamlit as st
-
-
-locale.setlocale(locale.LC_ALL, "")
 
 
 main, help = st.tabs(["Main", "Help"])
@@ -73,7 +70,7 @@ with main:
                 url="http://api:8000/quote/",
                 params=params,
             ).json()
-            quote_in_dollars = locale.currency(quote, grouping=True)
+            quote_in_dollars = format_currency(quote, 'USD', locale='en_US')
 
             st.divider()
             st.subheader(
