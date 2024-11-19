@@ -10,9 +10,9 @@ I found this very interesting and I decided to build a proxy for that service. B
 
 The goals for this project are to:
 
-1. build a simple, yet complete, end-to-end pipeline for predicting house prices,
-2. build a web app where users can input various characteristics and receive a quick quote (via an api call), and
-3. deploy the web app using Docker and AWS.
+1. build a simple, yet complete, end-to-end pipeline for predicting house prices (see [Part I](methodology.md#part-i-end-to-end-ml-pipeline)),
+2. build a web app UI where users can input various characteristics and receive a quick quote (via an api call) (see [Part II](methodology.md#part-ii-streamlit-ui-and-serving-with-fastapi)), and
+3. deploy the web app using Docker (see [Part III](methodology.md#part-iii-deployment-with-docker-containers)).
 
 ## Tools
 ![pandas Badge](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=fff&style=plastic)

@@ -23,6 +23,7 @@ theme:
 
 plugins:
   - glightbox
+  - mkdocstrings
 
 markdown_extensions:
   - admonition
