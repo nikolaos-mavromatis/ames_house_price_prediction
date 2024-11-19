@@ -1,11 +1,17 @@
 from pathlib import Path
 
+from sklearn.impute import SimpleImputer
 import typer
 from loguru import logger
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, RobustScaler
+from sklearn.preprocessing import (
+    OneHotEncoder,
+    OrdinalEncoder,
+    RobustScaler,
+    PolynomialFeatures,
+)
 from pickle import dump
 
 from ames_house_price_prediction.config import (
@@ -34,7 +40,9 @@ def main(
 
     df = input_df.pipe(make_features)
 
-    numeric_transformer = Pipeline(steps=[("scaler", RobustScaler())])
+    numeric_transformer = Pipeline(
+        steps=[("imputer", SimpleImputer(strategy="median")), ("scaler", RobustScaler())]
+    )
     ordinal_transformer = Pipeline(
         steps=[
             (
@@ -63,12 +71,16 @@ def main(
         remainder="drop",
         verbose_feature_names_out=False,
     )
-    transformed_df = pd.DataFrame(
-        preprocessor.fit_transform(df), columns=preprocessor.get_feature_names_out()
+    pipe = Pipeline(
+        steps=[
+            ("preprocessor", preprocessor),
+            ("poly", PolynomialFeatures(2, include_bias=True)),
+        ]
     )
+    transformed_df = pd.DataFrame(pipe.fit_transform(df), columns=pipe.get_feature_names_out())
 
     with open(preprocessor_path, "wb") as f:
-        dump(preprocessor, f, protocol=5)
+        dump(pipe, f, protocol=5)
 
     transformed_df.to_parquet(features_path, index=False)
     df[[TARGET]].to_parquet(labels_path, index=False)
