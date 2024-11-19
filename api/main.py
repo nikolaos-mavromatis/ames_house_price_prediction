@@ -37,7 +37,7 @@ async def quote(
     YearRemodAdd: int,
     OverallQual: int,
     OverallCond: int,
-):
+) -> float:
     answers = {
         "LotArea": LotArea,
         "YearBuilt": YearBuilt,

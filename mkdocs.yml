@@ -20,9 +20,11 @@ theme:
   features:
     - navigation.path
     - content.code.copy
+    - content.code.annotate
 
 plugins:
-  - render_swagger
+  - glightbox
+  - mkdocstrings
 
 markdown_extensions:
   - admonition
@@ -34,3 +36,6 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
