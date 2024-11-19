@@ -20,6 +20,7 @@ theme:
   features:
     - navigation.path
     - content.code.copy
+    - content.code.annotate
 
 plugins:
   - glightbox

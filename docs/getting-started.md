@@ -18,8 +18,12 @@ cd house-price-quoting-app
 Make sure you have docker installed. The easiest way is by [installing Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/). A Docker Desktop installation will also install Docker Compose, which is used to spin up the containers.
 
 ``` bash
-docker-compose up -d
+docker-compose build --no-cache #(1)!
+docker-compose up -d #(2)!
 ```
+
+1.  By default, Docker uses cached images to spin up the containers. `--no-cache` deactivates this behavior.
+2.  `-d` flag keeps the containers running in the background and frees up the terminal.
 
 This should result to the following :
 ``` bash
