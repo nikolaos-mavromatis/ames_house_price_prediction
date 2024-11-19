@@ -2,7 +2,7 @@
 
 ## Background
 
-Recently we went through the process of selling our house here in the Netherlands and the first quote we had was an automated one from the [funda](https://funda.nl) app. 
+Recently we went through the process of selling our house in the Netherlands and the first quote we had was an automated one from the [funda](https://funda.nl) app. The quote was based on various house characteristics that were already filled in when setting up your house in the app, but also on the current condition of the house which was based on user input. 
 
 I found this very interesting and I decided to build a proxy for that service. Being surrounded by engineers in my family and having studied civil engineering myself, I knew what factors would be the most influential which would allow me to focus on the technical implementation. 
 
@@ -21,6 +21,7 @@ The goals for this project are to:
 ![FastAPI Badge](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=fff&style=plastic)
 ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=plastic)
 ![Amazon Web Services Badge](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?logo=amazonwebservices&logoColor=fff&style=plastic)
+![Pytest Badge](https://img.shields.io/badge/Pytest-0A9EDC?logo=pytest&logoColor=fff&style=plastic)
 ![Material for MkDocs Badge](https://img.shields.io/badge/Material%20for%20MkDocs-526CFE?logo=materialformkdocs&logoColor=fff&style=plastic)
 
 ## Commands
