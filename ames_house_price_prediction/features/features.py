@@ -1,13 +1,11 @@
 from pathlib import Path
 
-import numpy as np
 import typer
 from loguru import logger
-from tqdm import tqdm
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MinMaxScaler, OneHotEncoder, OrdinalEncoder, RobustScaler
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, RobustScaler
 from pickle import dump
 
 from ames_house_price_prediction.config import (
@@ -18,10 +16,8 @@ from ames_house_price_prediction.config import (
     PROCESSED_DATA_DIR,
     TARGET,
 )
-from ames_house_price_prediction.features.utils import (
-    calculate_lot_age,
-    calculate_years_since_remodel,
-)
+from ames_house_price_prediction.features.utils import make_features
+
 
 app = typer.Typer()
 
@@ -36,7 +32,7 @@ def main(
     logger.info("Generating features from dataset...")
     input_df = pd.read_parquet(input_path)
 
-    df = input_df.pipe(calculate_lot_age).pipe(calculate_years_since_remodel)  # REFACTOR
+    df = input_df.pipe(make_features)
 
     numeric_transformer = Pipeline(steps=[("scaler", RobustScaler())])
     ordinal_transformer = Pipeline(

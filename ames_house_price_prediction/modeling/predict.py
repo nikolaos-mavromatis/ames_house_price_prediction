@@ -3,14 +3,10 @@ from pickle import load
 
 import typer
 from loguru import logger
-from tqdm import tqdm
 import pandas as pd
 
 from ames_house_price_prediction.config import MODELS_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR, TARGET
-from ames_house_price_prediction.features.utils import (
-    calculate_lot_age,
-    calculate_years_since_remodel,
-)
+from ames_house_price_prediction.features.utils import make_features
 
 app = typer.Typer()
 
@@ -24,7 +20,7 @@ def main(
 ):
     logger.info("Performing inference for model...")
     raw_input_df = pd.read_csv(features_path)
-    input_df = raw_input_df.pipe(calculate_lot_age).pipe(calculate_years_since_remodel)  # REFACTOR
+    input_df = raw_input_df.pipe(make_features)
 
     with open(preprocessor_path, "rb") as f:
         preprocessor = load(f)
