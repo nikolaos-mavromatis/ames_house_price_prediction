@@ -52,7 +52,16 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     <body dir="ltr">
@@ -246,9 +255,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#github-repository" class="md-nav__link">
+  <a href="#clone-repo" class="md-nav__link">
     <span class="md-ellipsis">
-      GitHub Repository
+      Clone repo
     </span>
   </a>
   
@@ -265,27 +274,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-container-networking" class="md-nav__link">
+  <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Setup Container Networking
+      Setup
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-the-images" class="md-nav__link">
+  <a href="#teardown" class="md-nav__link">
     <span class="md-ellipsis">
-      Build the images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-the-containers" class="md-nav__link">
-    <span class="md-ellipsis">
-      Run the containers
+      Teardown
     </span>
   </a>
   
@@ -293,6 +293,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use the app
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recap
+    </span>
+  </a>
   
 </li>
       
@@ -351,9 +369,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#github-repository" class="md-nav__link">
+  <a href="#clone-repo" class="md-nav__link">
     <span class="md-ellipsis">
-      GitHub Repository
+      Clone repo
     </span>
   </a>
   
@@ -370,27 +388,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-container-networking" class="md-nav__link">
+  <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Setup Container Networking
+      Setup
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-the-images" class="md-nav__link">
+  <a href="#teardown" class="md-nav__link">
     <span class="md-ellipsis">
-      Build the images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-the-containers" class="md-nav__link">
-    <span class="md-ellipsis">
-      Run the containers
+      Teardown
     </span>
   </a>
   
@@ -398,6 +407,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use the app
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recap
+    </span>
+  </a>
   
 </li>
       
@@ -420,27 +447,72 @@
 
 
 <h1 id="getting-started">Getting started</h1>
-<p>This is where you describe how to get set up on a clean install, including the
-commands necessary to get the raw data (using the <code>sync_data_from_s3</code> command,
-for example), and then how to make the cleaned, final data sets.</p>
-<h2 id="github-repository">GitHub Repository</h2>
-<pre><code class="language-bash">git clone https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
-</code></pre>
+<h2 id="clone-repo">Clone repo</h2>
+<p>Clone the repository into your favorite folder:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
+</span></code></pre></div></p>
+<p>and navigate to it:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>house-price-quoting-app
+</span></code></pre></div></p>
 <h2 id="docker-containers">Docker Containers</h2>
-<p>In this project I had to create 2 containers </p>
-<h3 id="setup-container-networking">Setup Container Networking</h3>
-<p>As per Docker's <a href="https://docs.docker.com/engine/network/">documentation page</a>, containers are by default agnostic to the type of network they are attached to.</p>
-<p>We need to create a user-defined network that will allow </p>
-<pre><code class="language-bash">docker network create housing_app_network
-</code></pre>
-<h3 id="build-the-images">Build the images</h3>
-<pre><code class="language-bash">docker build -f dockerfile-fastapi -t inference_api .
-docker build -f dockerfile-streamlit -t frontend_app .
-</code></pre>
-<h3 id="run-the-containers">Run the containers</h3>
-<pre><code class="language-bash">docker run --network housing_app_network -itd --name api_container -p 8000:8000 inference_api
-docker run --network housing_app_network -itd --name app_container -p 8501:8501 frontend_app
-</code></pre>
+<p>In this project two containers need to be created:</p>
+<ul>
+<li>one for the API, and</li>
+<li>one for the UI.</li>
+</ul>
+<p>Since the UI makes a call to the API to receive the prediction based on the user's inputs, the two containers need to communicate with each other.</p>
+<p>This is not straightforward, because as per Docker's <a href="https://docs.docker.com/engine/network/">documentation page</a>, containers are by default agnostic to the type of network they are attached to. </p>
+<h3 id="setup">Setup</h3>
+<p>Make sure you have docker installed. The easiest way is by <a href="https://docs.docker.com/desktop/setup/install/mac-install/">installing Docker Desktop</a>. A Docker Desktop installation will also install Docker Compose, which is used to spin up the containers.</p>
+<p>I used <code>docker-compose</code> to build both containers and the network over which they will communicate from a single file. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The last part in <code>docker-compose.yml</code>, </p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">housing-app</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</span></code></pre></div>
+<p>takes care of creating the network where the two containers will be able to communicate with each other.</p>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Created<span class="w">                 </span><span class="m">0</span>.0s<span class="w"> </span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s
+</span></code></pre></div>
+<h3 id="teardown">Teardown</h3>
+<p>Once you are done experimenting, you can remove all containers and networks by running this command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker-compose<span class="w"> </span>down
+</span></code></pre></div>
+<p>In this case, it should result to the following:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.5s
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Removed<span class="w">                 </span><span class="m">0</span>.1s
+</span></code></pre></div></p>
+<h2 id="use-the-app">Use the app</h2>
+<p>Visit <a href="http://localhost:8501">http://localhost:8501</a> and experiment with the UI.</p>
+<p>This is how it looks like:</p>
+<figure>
+<p><a class="glightbox" href="../assets/UI_Screenshot.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="User Interface" src="../assets/UI_Screenshot.png" width="80%" /></a></p>
+<figcaption>
+<p>The UI was made with Streamlit.</p>
+</figcaption>
+</figure>
+<h2 id="recap">Recap</h2>
+<p>After navigating to the project directory where the project will live, this is the full script to set it up from scratch.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>house-price-quoting-app
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>open<span class="w"> </span>http://localhost:8501/
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don't forget to tear down everything after you have finished.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker-compose<span class="w"> </span>down
+</span></code></pre></div>
+</div>
 
 
 
@@ -487,11 +559,13 @@ docker run --network housing_app_network -itd --name app_container -p 8501:8501 
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

@@ -50,7 +50,16 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     <body dir="ltr">
@@ -402,13 +411,17 @@
 <h1 id="methodology">Methodology</h1>
 <h2 id="part-i-end-to-end-ml-pipeline">Part I: end-to-end ML pipeline</h2>
 <p>We can start the analysis using <strong>a minimum set of relevant features</strong> and include/build more later on.</p>
-<p>The <strong>advantages</strong> of this approach are:
-1. get a baseline model early on and iterate on that,
-2. perform a robust initial data analysis as well as for each additional feature,
-3. better estimate the importance of adding a feature and its implications,
-4. avoid getting overwhelmed by all the possibilities around analysis, feature engineering, etc.</p>
-<p>And, the <strong>disadvantages</strong>:
-1. might not be possible in case of a large feature space; feature selection might be more suitable.</p>
+<p>The <strong>advantages</strong> of this approach are:</p>
+<ol>
+<li>get a baseline model early on and iterate on that,</li>
+<li>perform a robust initial data analysis as well as for each additional feature,</li>
+<li>better estimate the importance of adding a feature and its implications,</li>
+<li>avoid getting overwhelmed by all the possibilities around analysis, feature engineering, etc.</li>
+</ol>
+<p>And, the <strong>disadvantages</strong>:</p>
+<ol>
+<li>might not be possible in case of a large feature space; feature selection might be more suitable.</li>
+</ol>
 <p>However, the purpose of the trained model is to serve the quoting app and not to provide the best predictions possible.</p>
 <h3 id="features">Features</h3>
 <p>The <strong>minimum set of relevant features</strong> includes:</p>
@@ -470,11 +483,13 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>
