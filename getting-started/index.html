@@ -410,8 +410,13 @@
 </span></code></pre></div></p>
 <h2 id="setup-docker-containers">Setup Docker containers</h2>
 <p>Make sure you have docker installed. The easiest way is by <a href="https://docs.docker.com/desktop/setup/install/mac-install/">installing Docker Desktop</a>. A Docker Desktop installation will also install Docker Compose, which is used to spin up the containers.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker-compose<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span><span class="c1">#(1)!</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span><span class="c1">#(2)!</span>
 </span></code></pre></div>
+<ol>
+<li>By default, Docker uses cached images to spin up the containers. <code>--no-cache</code> deactivates this behavior.</li>
+<li><code>-d</code> flag keeps the containers running in the background and frees up the terminal.</li>
+</ol>
 <p>This should result to the following :
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Created<span class="w">                 </span><span class="m">0</span>.0s<span class="w"> </span>
@@ -498,7 +503,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
