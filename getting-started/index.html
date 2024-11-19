@@ -45,6 +45,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -264,35 +266,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-containers" class="md-nav__link">
+  <a href="#setup-docker-containers" class="md-nav__link">
     <span class="md-ellipsis">
-      Docker Containers
+      Setup Docker containers
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Docker Containers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#teardown" class="md-nav__link">
-    <span class="md-ellipsis">
-      Teardown
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -378,35 +356,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-containers" class="md-nav__link">
+  <a href="#setup-docker-containers" class="md-nav__link">
     <span class="md-ellipsis">
-      Docker Containers
+      Setup Docker containers
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Docker Containers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#teardown" class="md-nav__link">
-    <span class="md-ellipsis">
-      Teardown
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -454,45 +408,30 @@
 <p>and navigate to it:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>house-price-quoting-app
 </span></code></pre></div></p>
-<h2 id="docker-containers">Docker Containers</h2>
-<p>In this project two containers need to be created:</p>
-<ul>
-<li>one for the API, and</li>
-<li>one for the UI.</li>
-</ul>
-<p>Since the UI makes a call to the API to receive the prediction based on the user's inputs, the two containers need to communicate with each other.</p>
-<p>This is not straightforward, because as per Docker's <a href="https://docs.docker.com/engine/network/">documentation page</a>, containers are by default agnostic to the type of network they are attached to. </p>
-<h3 id="setup">Setup</h3>
+<h2 id="setup-docker-containers">Setup Docker containers</h2>
 <p>Make sure you have docker installed. The easiest way is by <a href="https://docs.docker.com/desktop/setup/install/mac-install/">installing Docker Desktop</a>. A Docker Desktop installation will also install Docker Compose, which is used to spin up the containers.</p>
-<p>I used <code>docker-compose</code> to build both containers and the network over which they will communicate from a single file. </p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
 </span></code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The last part in <code>docker-compose.yml</code>, </p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">networks</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">housing-app</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
-</span></code></pre></div>
-<p>takes care of creating the network where the two containers will be able to communicate with each other.</p>
-</div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Created<span class="w">                 </span><span class="m">0</span>.0s<span class="w"> </span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s
-</span></code></pre></div>
-<h3 id="teardown">Teardown</h3>
+<p>This should result to the following :
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Created<span class="w">                 </span><span class="m">0</span>.0s<span class="w"> </span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Started<span class="w">                 </span><span class="m">0</span>.2s
+</span></code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Teardown</p>
 <p>Once you are done experimenting, you can remove all containers and networks by running this command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker-compose<span class="w"> </span>down
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker-compose<span class="w"> </span>down
 </span></code></pre></div>
 <p>In this case, it should result to the following:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.5s
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Removed<span class="w">                 </span><span class="m">0</span>.1s
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Running<span class="w"> </span><span class="m">3</span>/3
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-app-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.2s<span class="w"> </span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>✔<span class="w"> </span>Container<span class="w"> </span>house-price-quoting-app-api-1<span class="w">         </span>Removed<span class="w">                 </span><span class="m">0</span>.5s
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>✔<span class="w"> </span>Network<span class="w"> </span>house-price-quoting-app_housing-app<span class="w">     </span>Removed<span class="w">                 </span><span class="m">0</span>.1s
 </span></code></pre></div></p>
+</div>
 <h2 id="use-the-app">Use the app</h2>
-<p>Visit <a href="http://localhost:8501">http://localhost:8501</a> and experiment with the UI.</p>
+<p>Once the containers are up and running, visit <a href="http://localhost:8501">http://localhost:8501</a> and experiment with the UI.</p>
 <p>This is how it looks like:</p>
 <figure>
 <p><a class="glightbox" href="../assets/UI_Screenshot.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="User Interface" src="../assets/UI_Screenshot.png" width="80%" /></a></p>
@@ -502,15 +441,15 @@
 </figure>
 <h2 id="recap">Recap</h2>
 <p>After navigating to the project directory where the project will live, this is the full script to set it up from scratch.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>house-price-quoting-app
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>open<span class="w"> </span>http://localhost:8501/
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nikolaos-mavromatis/house-price-quoting-app.git
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>house-price-quoting-app
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>open<span class="w"> </span>http://localhost:8501/
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Don't forget to tear down everything after you have finished.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker-compose<span class="w"> </span>down
+<p>Don't forget to tear down everything after you have finished. The containers will eat up your memory otherwise.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker-compose<span class="w"> </span>down
 </span></code></pre></div>
 </div>
 

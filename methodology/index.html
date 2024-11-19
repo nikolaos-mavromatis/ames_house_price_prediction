@@ -43,6 +43,8 @@
       
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -309,8 +311,44 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-ii-streamlit-ui-and-serving-with-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part II: Streamlit UI and serving with FastAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api.main.quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      quote
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-iii-deployment-with-docker-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part III: deployment with Docker containers
+    </span>
+  </a>
   
 </li>
       
@@ -385,8 +423,44 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-ii-streamlit-ui-and-serving-with-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part II: Streamlit UI and serving with FastAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api.main.quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      quote
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-iii-deployment-with-docker-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part III: deployment with Docker containers
+    </span>
+  </a>
   
 </li>
       
@@ -420,7 +494,7 @@
 </ol>
 <p>And, the <strong>disadvantages</strong>:</p>
 <ol>
-<li>might not be possible in case of a large feature space; feature selection might be more suitable.</li>
+<li>might not be possible in case of a large feature space; feature selection methods is the go-to option.</li>
 </ol>
 <p>However, the purpose of the trained model is to serve the quoting app and not to provide the best predictions possible.</p>
 <h3 id="features">Features</h3>
@@ -436,7 +510,102 @@
 <h3 id="model">Model</h3>
 <p>I used a scikit-learn's <code>RidgeRegression()</code> model with the default parameters to train the model. </p>
 <h3 id="performance">Performance</h3>
-<p>A <strong>5-fold cross-validation</strong> was used to evaluate the model. The scoring metric used was the default <strong>explained variance</strong> metric and the results that the current model achieved is a dashing <strong>0.60</strong>.</p>
+<p>A <strong>5-fold cross-validation</strong> was used to evaluate the model. The scoring metric used was the default <strong>explained variance</strong> metric and the results that the current model achieved is a dazzling <strong>0.68</strong>.</p>
+<h3 id="outputs">Outputs</h3>
+<p>There are two pickled objects generated from running the pipeline:</p>
+<ol>
+<li><code>preprocessor.pkl</code>: used to preprocess the data (one-hot encoding, scaling, etc.), and</li>
+<li><code>model.pkl</code>: used in conjunction with test/inference data to generate predictions.</li>
+</ol>
+<h2 id="part-ii-streamlit-ui-and-serving-with-fastapi">Part II: Streamlit UI and serving with FastAPI</h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="api.main.quote"></a>
+    <div class="doc doc-contents first">
+
+            <details class="quote">
+              <summary>Source code in <code>api/main.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/quote/&quot;</span><span class="p">)</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">quote</span><span class="p">(</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="n">LotArea</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="n">YearBuilt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="n">YearRemodAdd</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="n">OverallQual</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="n">OverallCond</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="n">answers</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a>        <span class="s2">&quot;LotArea&quot;</span><span class="p">:</span> <span class="n">LotArea</span><span class="p">,</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a>        <span class="s2">&quot;YearBuilt&quot;</span><span class="p">:</span> <span class="n">YearBuilt</span><span class="p">,</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a>        <span class="s2">&quot;YearRemodAdd&quot;</span><span class="p">:</span> <span class="n">YearRemodAdd</span><span class="p">,</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45"></a>        <span class="s2">&quot;YrSold&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46"></a>        <span class="s2">&quot;OverallQual&quot;</span><span class="p">:</span> <span class="n">OverallQual</span><span class="p">,</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="s2">&quot;OverallCond&quot;</span><span class="p">:</span> <span class="n">OverallCond</span><span class="p">,</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="p">}</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="n">inference_data</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">answers</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">calculate_lot_age</span><span class="p">)</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">calculate_years_since_remodel</span><span class="p">)</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="p">)</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">load_pickle_file</span><span class="p">(</span><span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="s2">&quot;preprocessor.pkl&quot;</span><span class="p">)</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="n">preprocessed_inference_data</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">inference_data</span><span class="p">)</span>
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">load_pickle_file</span><span class="p">(</span><span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="s2">&quot;model.pkl&quot;</span><span class="p">)</span>
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">quote</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocessed_inference_data</span><span class="p">)</span>
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a>
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="k">return</span> <span class="n">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="part-iii-deployment-with-docker-containers">Part III: deployment with Docker containers</h2>
+<p>In this project two containers need to be created:</p>
+<ul>
+<li>one for the API, and</li>
+<li>one for the UI.</li>
+</ul>
+<p>Since the UI makes a call to the API to receive the prediction based on the user's inputs, the two containers need to communicate with each other.</p>
+<p>This is not straightforward, because as per Docker's <a href="https://docs.docker.com/engine/network/">documentation page</a>, containers are by default agnostic to the type of network they are attached to. </p>
+<p>I used <code>docker-compose</code> to build both containers and the network over which they will communicate from a single file. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The last part in <code>docker-compose.yml</code>, </p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">networks</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">housing-app</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</span></code></pre></div>
+<p>takes care of creating the network where the two containers will be able to communicate with each other.</p>
+</div>
 
 
 
